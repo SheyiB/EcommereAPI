@@ -1,0 +1,31 @@
+{
+  "name": "ecommerce-api",
+  "version": "1.0.0",
+  "description": "An api for an ecommerce website",
+  "main": "server.js",
+  "scripts": {
+    "start": "NODE_ENV=production node server",
+    "dev": "nodemon server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://www.github.com/sheyib"
+  },
+  "keywords": [
+    "API",
+    "ecommerce",
+    "backend"
+  ],
+  "author": "Elijah Banjo",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "mongoose": "^6.0.12",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.7",
+    "password-validator": "^5.2.1",
+    "path": "^0.12.7",
+    "validator": "^13.7.0"
+  }
+}

@@ -1,0 +1,13 @@
+ECommerce API
+
+Basic Funcationality (CURD Function)
+Customers
+-Users: Admin, User
+-Model(User): Name, Address, Billing Info, Basic Details, Cart, Total Amount.
+-Controller(User) : Add items, Delete items, Update qty.
+Items being bought
+-Model(items): Name, ID, Price.
+
+Mid Functionality (Advanced Querying)
+
+Advanced Funcationality (Security and Deployment)

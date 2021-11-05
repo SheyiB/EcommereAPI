@@ -34,6 +34,11 @@ const userSchema = new mongoose.Schema({
     dob: {
         type:Date
     },
+    userType:{
+        type: String,
+        enum: ['Customer'],
+        default: 'Customer'
+    },
     password:{
         type: String,
         required: true,
@@ -48,6 +53,7 @@ const userSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     }
+
 })
 
 module.exports = userModel = mongoose.model('user', userSchema)

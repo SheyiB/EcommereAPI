@@ -2,7 +2,7 @@ ECommerce API
 
 Basic Funcationality (CURD Function)
 Customers
--Users: Admin, User
+-Users: Admin, User x
 -Model(User): Name, Address, Billing Info, Basic Details, Cart, Total Amount.
 -Controller(User) : Add items, Delete items, Update qty.
 Items being bought

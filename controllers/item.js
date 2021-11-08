@@ -1,17 +1,17 @@
-const User = require('../models/user');
+const Item = require('../models/Item');
 
-//@desc Create User
-//@route POST /api/v1/user/:id
+//@desc Create Item
+//@route POST /api/v1/Item/:id
 //@access Public
-module.exports.createUser = async (req,res,next ) =>{
+module.exports.createItem = async (req,res,next ) =>{
 
     try {
-        const user = await User.create(req.body);
+        const item = await Item.create(req.body);
 
         res.status(201).json({
             success: true,
-            message: `Creating User `,
-            data: user
+            message: `Creating Item `,
+            data: item
         });
 
     } catch (err) {
@@ -21,85 +21,69 @@ module.exports.createUser = async (req,res,next ) =>{
 
         });
     }
-
-
-
-
-
     console.log(req.body)
 }
 
-//@desc Get all Users
-//@route GET /api/v1/user
+//@desc Get all Items
+//@route GET /api/v1/Item
 //@access Private
-module.exports.getUsers = async(req,res,next) =>{
+module.exports.getItems = async(req,res,next) =>{
     try {
-        const user = await User.find()
+        const items = await Item.find()
 
         res.status(200).json({
             success: true,
-            data: user
+            data: items
         });
     } catch (error) {
         res.status(400).json({
             success: false,
             message: error.message,
-
         });
     }
-
 }
 
-//@desc Get one User
-//@route GET /api/v1/user/:id
+//@desc Get one Item
+//@route GET /api/v1/Item/:id
 //@access Private
-module.exports.getUser = async(req,res,next ) =>{
+module.exports.getItem = async(req,res,next ) =>{
     try{
-
-    const user = await User.findById(req.params.id)
-
-    if(!user){
+    const item = await Item.findById(req.params.id)
+    if(!item){
         res.status(404).json({
-            message: `User with ID: ${req.params.id} not found`
+            message: `Item with ID: ${req.params.id} not found`
         })
     }
-
     res.status(200).json({
         success: true,
-        data: user
+        data: item
     });
-
     }
     catch(error){
         res.status(400).json({
             success: false,
             message: error.message,
-
         })
 }}
 
-//@desc Update User
-//@route PUT /api/v1/user/:id
+//@desc Update Item
+//@route PUT /api/v1/Item/:id
 //@access Private
-module.exports.updateUser = async (req,res,next ) =>{
-
+module.exports.updateItem = async (req,res,next ) =>{
     try{
-        let user = await User.findById(req.params.id)
-
-        if(!user){
+        let item = await Item.findById(req.params.id)
+        if(!item){
             res.status(404).json({
-                message: `User with ID: ${req.params.id} not found`
+                message: `Item with ID: ${req.params.id} not found`
             })
         }
-
-        user = await User.findOneAndUpdate(req.params.id, req.body, {
+        item = await Item.findOneAndUpdate(req.params.id, req.body, {
             new: true,
             runValidators: true
         })
-
         res.status(200).json({
             success: true,
-            data: user
+            data: item
         });
     }
 
@@ -108,24 +92,22 @@ module.exports.updateUser = async (req,res,next ) =>{
             success: false,
             message: error.message,
     })
-
-
 }
 }
-//@desc Delete User
-//@route DELETE /api/v1/user/:id
+
+//@desc Delete Item
+//@route DELETE /api/v1/Item/:id
 //@access Private
-module.exports.deleteUser = async(req,res,next ) =>{
+module.exports.deleteItem = async(req,res,next ) =>{
 try {
-    const user = await User.findById(req.params.id)
+    const item = await Item.findById(req.params.id)
 
-    if(!user){
+    if(!item){
         res.status(404).json({
-            message: `User with ID: ${req.params.id} not found`
+            message: `Item with ID: ${req.params.id} not found`
         })
     }
-
-    user.remove()
+    item.remove()
 
     res.status(200).json({
         success: true,
@@ -136,9 +118,7 @@ try {
         sucess: false,
         message: err.message
     })
-
 }
-
 }
 
 

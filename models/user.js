@@ -49,10 +49,12 @@ const userSchema = new mongoose.Schema({
             message : 'Password must consist of Uppercase, LowerCase and a Number'
         }
     },
+    orders: String,
     register_date:{
         type: Date,
         default: Date.now
     }
+
 
 })
 

@@ -4,7 +4,6 @@ const User = require('../models/user');
 //@route POST /api/v1/user/:id
 //@access Public
 module.exports.createUser = async (req,res,next ) =>{
-
     try {
         const user = await User.create(req.body);
 
@@ -21,11 +20,6 @@ module.exports.createUser = async (req,res,next ) =>{
 
         });
     }
-
-
-
-
-
     console.log(req.body)
 }
 
@@ -52,7 +46,7 @@ module.exports.getUsers = async(req,res,next) =>{
 
 //@desc Get one User
 //@route GET /api/v1/user/:id
-//@access Private
+//@access Private:
 module.exports.getUser = async(req,res,next ) =>{
     try{
 
@@ -80,7 +74,7 @@ module.exports.getUser = async(req,res,next ) =>{
 
 //@desc Update User
 //@route PUT /api/v1/user/:id
-//@access Private
+//@access Private: Admin
 module.exports.updateUser = async (req,res,next ) =>{
 
     try{
@@ -114,7 +108,7 @@ module.exports.updateUser = async (req,res,next ) =>{
 }
 //@desc Delete User
 //@route DELETE /api/v1/user/:id
-//@access Private
+//@access Private: Admin
 module.exports.deleteUser = async(req,res,next ) =>{
 try {
     const user = await User.findById(req.params.id)
@@ -140,5 +134,6 @@ try {
 }
 
 }
-
-
+//@desc Login User
+//@route DELETE /api/v1/user/:id
+//@access Private

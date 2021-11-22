@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const ItemModel = mongoose.Schema({
     name : {
         type: String,
+        unique: true,
         required: true
     },
     description : {
@@ -27,5 +28,5 @@ const ItemModel = mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model('item', ItemModel)
+module.exports = mongoose.model('Item', ItemModel)
 

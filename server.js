@@ -1,6 +1,7 @@
 //Import files and dependencies
 const express = require('express');
 const User = require('./routes/User');
+const Cart = require('./routes/Cart')
 const Item = require('./routes/Item');
 const connectDB = require('./config/db');
 const path = require('path');
@@ -28,6 +29,7 @@ app.use(express.json());
 //Mount Routers
 app.use('/api/v1/users',User);
 app.use('/api/v1/items',Item);
+app.use('/api/v1/cart',Cart);
 
 
 const PORT = process.env.PORT || 9230;

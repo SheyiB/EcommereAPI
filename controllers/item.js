@@ -1,4 +1,4 @@
-const Item = require('../models/Item');
+const Item = require('../models/item');
 
 //@desc Create Item
 //@route POST /api/v1/Item/:id
@@ -33,6 +33,7 @@ module.exports.getItems = async(req,res,next) =>{
 
         res.status(200).json({
             success: true,
+            count: items.length,
             data: items
         });
     } catch (error) {

@@ -2,14 +2,14 @@ const mongoose = require('mongoose');
 
 const CartSchema = mongoose.Schema({
     userId:{
-        type: String,
-        ref: "user"
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
     },
-    items : [
-        {
-            productId: {
+    items : [{
+        productId: {
                 type: String,
-                ref: 'item'
+               required: true
             },
             name: {
                 type: String,
@@ -31,5 +31,8 @@ const CartSchema = mongoose.Schema({
     }
 })
 
+CartSchema.methods.getTotalBill = () => {
+    this.bill = this.items.quantity * this.items.price
+}
 module.exports = mongoose.model('cart', CartSchema)
 

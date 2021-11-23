@@ -176,18 +176,28 @@ module.exports.deleteItemFromCart = async(req,res) =>{
 
         const name = item.name;
 
-
         if(!cart){
             res.status(404).json(`Cart does not exist for user ${itemId} use addItemToCart Route instead`);
         }
         if(cart) {
+            //Check for item Index on Cart
+            let itemIndex = cart.items.findIndex(p => p.productId == itemId)
 
             //If it exists then update the quantity and the item on the cart
-            if(cart.items[0].name == name)
-            {
-
+            if(itemIndex == -1){
+                res.status(404).json(`Item not found on Cart`);
             }
 
+            else{
+                cart.items.splice(itemIndex,1);
+                cart.bill = cart.items.reduce((sum,item) => sum + item.quantity * item.price,0);
+                cart = await cart.save();
+
+                res.status(201).json({
+                    success: true,
+                    cart
+                })
+            }
 
         }
     } catch (error) {

@@ -3,6 +3,7 @@ const express = require('express');
 const User = require('./routes/User');
 const Cart = require('./routes/Cart')
 const Item = require('./routes/Item');
+const Order = require('./routes/Order');
 const connectDB = require('./config/db');
 const path = require('path');
 const dotenv = require('dotenv');
@@ -30,6 +31,7 @@ app.use(express.json());
 app.use('/api/v1/users',User);
 app.use('/api/v1/items',Item);
 app.use('/api/v1/cart',Cart);
+app.use('/api/v1/order',Order);
 
 
 const PORT = process.env.PORT || 9230;

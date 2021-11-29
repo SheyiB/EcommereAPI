@@ -160,8 +160,8 @@ module.exports.updateCart = async(req,res) =>{
 
 }
 
-//@desc : Update Item on the cart
-//@Route : PUT api/v1/cart
+//@desc : Delete Item on the cart
+//@Route : DELETE api/v1/cart
 //Private
 module.exports.deleteItemFromCart = async(req,res) =>{
     const userId = req.params.id;

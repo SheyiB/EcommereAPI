@@ -34,6 +34,10 @@ const userSchema = new mongoose.Schema({
     dob: {
         type:Date
     },
+    phone: {
+        type: Number,
+        required: true
+    },
     userType:{
         type: String,
         enum: ['Customer'],

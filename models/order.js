@@ -1,11 +1,12 @@
 const mongoose = require('mongoose')
 
 const OrderSchema = mongoose.Schema({
-    user:{
+    userId:{
         type: String,
-        ref: user
+        ref: 'User'
+
     },
-    item:{
+    item:[{
         name: {
             type: String,
             required: true
@@ -14,17 +15,30 @@ const OrderSchema = mongoose.Schema({
             type: Number,
             required: true
         },
-        id:{
+        productId:{
             type: String,
-            ref: item
+            required: true
         },
         quantity: {
             type: Number,
             required: true,
-            default: 1,
             min: 1
         }
+    }],
+    bill:{
+        type: Number,
+        required: true
+    },
+    status:{
+        type: String,
+        default: 'Pending'
+    },
+    date_added: {
+        type: Date,
+        default: Date.now,
+        required: true
     }
+
 })
 
 module.exports = mongoose.model('order', OrderSchema)

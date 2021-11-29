@@ -8,8 +8,8 @@ const CartSchema = mongoose.Schema({
     },
     items : [{
         productId: {
-                type: String,
-               required: true
+            type: String,
+            required: true
             },
             name: {
                 type: String,
@@ -29,10 +29,8 @@ const CartSchema = mongoose.Schema({
         required: true,
         default: 0
     }
+
 })
 
-CartSchema.methods.getTotalBill = () => {
-    this.bill = this.items.quantity * this.items.price
-}
 module.exports = mongoose.model('cart', CartSchema)
 

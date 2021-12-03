@@ -8,6 +8,7 @@ const connectDB = require('./config/db');
 const path = require('path');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
+const Auth = require('./routes/Auth');
 
 
 
@@ -32,6 +33,7 @@ app.use('/api/v1/users',User);
 app.use('/api/v1/items',Item);
 app.use('/api/v1/cart',Cart);
 app.use('/api/v1/order',Order);
+app.use('/api/v1/auth', Auth);
 
 
 const PORT = process.env.PORT || 9230;

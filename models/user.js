@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
 const {isEmail} = require('validator');
 const passwordValidator = require('password-validator');
-
+const bcrypt = require('bcrypt');
 const schema = new passwordValidator();
+const jwt = require('jsonwebtoken');
 
 const checkPassword =  (password) =>{
     schema
@@ -16,7 +17,7 @@ const checkPassword =  (password) =>{
 }
 
 
-const userSchema = new mongoose.Schema({
+const UserSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true
@@ -60,6 +61,28 @@ const userSchema = new mongoose.Schema({
     }
 
 
-})
+});
 
-module.exports = userModel = mongoose.model('User', userSchema)
+//Encrypt password before saving it to db using bcrypt
+UserSchema.pre('save', async function(next){
+    if(!this.isModified('password')){
+        next();
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt);
+});
+
+//Create JWT and Return
+UserSchema.methods.getSignedJwtToken = function(){
+    return jwt.sign({id: this._id}, process.env.JWT_SECRET,{
+        expiresIn: process.env.JWT_EXPIRE
+    })
+}
+
+//Check if password matches
+UserSchema.methods.passwordMatch = async function(enteredPassword){
+    return await bcrypt.compare(enteredPassword, this.password);
+};
+
+module.exports = userModel = mongoose.model('User', UserSchema)

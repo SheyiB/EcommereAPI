@@ -1,9 +1,10 @@
 const User = require('../models/user')
+
 //@desc Login User
 //@route GET /api/v1/user/:id
 //@access Public
 
-module.exports.createUser = async (req,res ) =>{
+module.exports.signup = async (req,res ) =>{
 
     try {
         const {name, email, address, dob, userType, password} = req.body
@@ -14,7 +15,7 @@ module.exports.createUser = async (req,res ) =>{
 
         res.status(201).json({
             success: true,
-            message: `Creating User `,
+            message: `Signup Successful `,
             data: user
         });
 
@@ -43,14 +44,23 @@ module.exports.login = async(req,res) =>{
         }
 
         // Check if password matches
-        const passwordMatch = await user.matchPassword(password);
+        const passwordMatch = await user.passwordMatch(password);
 
         if(!passwordMatch){
-            res.json(`Invalid credentials`)
+            res.json(`Invalid credentials`);
         }
 
-    } catch (error) {
+        const token = user.getSignedJwtToken();
 
+        const options = {
+            expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRE * 24 * 60 * 60 * 1000),
+            httpOnly: true
+        };
+
+        res.status(200).cookie('token', token, options).json({success:true, token, message: `Login Successful`});
+
+    } catch (error) {
+        res.status(500).json({success: false, data: 'An error has occured', message: error.message})
     }
 
 }

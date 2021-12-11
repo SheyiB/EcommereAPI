@@ -7,20 +7,24 @@ const User = require('../models/user')
 module.exports.signup = async (req,res ) =>{
 
     try {
-        const {name, email, address, dob, userType, password} = req.body
+        const {name, email, address, dob, userType, phone, password} = req.body
 
         const user = await User.create({
-            name, email, address, dob, userType, password
+            name, email, address, dob, userType, password, phone
         });
 
-        res.status(201).json({
-            success: true,
-            message: `Signup Successful `,
-            data: user
-        });
+        const token = user.getSignedJwtToken();
+        const options = {
+            expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRE * 24 * 60 * 60 * 1000),
+            httpOnly: true
+        };
+
+        res.status(201).cookie('token', token, options).json({success:true, token, message: `Signup Successful`});
+
+
 
     } catch (err) {
-         res.status(400).json({
+         res.status(500).json({
             success: false,
             message: err.message,
 
@@ -62,5 +66,5 @@ module.exports.login = async(req,res) =>{
     } catch (error) {
         res.status(500).json({success: false, data: 'An error has occured', message: error.message})
     }
-
 }
+

@@ -43,3 +43,5 @@ const server = app.listen(
     PORT,
     console.log(`Server is running on PORT: ${PORT} mongouri is ${process.env.MONGO_URI}`)
 );
+
+app.use('/', (req, res) => res.sendFile(path.join(__dirname+'/index.html')));

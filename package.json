@@ -4,7 +4,7 @@
   "description": "An api for an ecommerce website",
   "main": "server.js",
   "scripts": {
-    "start": "NODE_ENV=production node server",
+    "start": "node server",
     "dev": "nodemon server"
   },
   "repository": {
